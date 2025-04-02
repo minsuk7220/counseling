@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>상담 예약 - T트라우마 심리상담센터</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header, footer {
+      background-color: #3f51b5;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      background-color: #283593;
+      text-align: center;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #3f51b5;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #3f51b5;
+      color: white;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #303f9f;
+    }
+    #confirmation, #error {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      display: none;
+    }
+    #confirmation {
+      background-color: #e0ffe0;
+      color: #2e7d32;
+    }
+    #error {
+      background-color: #ffe0e0;
+      color: #c62828;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init('YOUR_USER_ID'); // EmailJS 사용자 ID로 바꾸세요
+    })();
+  </script>
+</head>
+<body>
+  <header>
+    <h1>상담 예약</h1>
+  </header>
+  <nav>
+    <a href="about.html">센터소개</a>
+    <a href="services.html">상담안내</a>
+    <a href="reservation.html">예약하기</a>
+    <a href="contact.html">오시는 길</a>
+  </nav>
+  <section>
+    <form id="reservationForm">
+      <label>이름 <input type="text" name="name" required></label>
+      <label>이메일 <input type="email" name="email" required></label>
+      <label>연락처 <input type="tel" name="phone" required></label>
+      <label>상담 종류
+        <select name="counselingType" required>
+          <option value="">-- 선택하세요 --</option>
+          <option value="개인상담">개인상담</option>
+          <option value="집단상담">집단상담</option>
+          <option value="가족상담">가족상담</option>
+          <option value="커플상담">커플상담</option>
+          <option value="위기상담">위기상담</option>
+          <option value="트라우마상담">트라우마상담</option>
+        </select>
+      </label>
+      <label>날짜 <input type="date" name="date" required></label>
+      <label>시간 <input type="time" name="time" step="1800" required></label>
+      <button type="submit">예약하기</button>
+    </form>
+    <div id="confirmation"></div>
+    <div id="error"></div>
+  </section>
+  <footer>
+    &copy; 2025 T트라우마 심리상담센터
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js';
+    import { getFirestore, collection, addDoc, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js';
+    import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyArMQk8bMa7WMoH8RNEOiKV3JZIRKpQWvM",
+      authDomain: "counsel-7bbf9.firebaseapp.com",
+      projectId: "counsel-7bbf9",
+      storageBucket: "counsel-7bbf9.firebasestorage.app",
+      messagingSenderId: "117698366955",
+      appId: "1:117698366955:web:d70bd7c1f06e7d8ea49dae",
+      measurementId: "G-41FP0SJE9F"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const analytics = getAnalytics(app);
+
+    const confirmationBox = document.getElementById('confirmation');
+    const errorBox = document.getElementById('error');
+
+    document.getElementById('reservationForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const selectedDateTime = new Date(`${data.date}T${data.time}`);
+        const oneHourLater = new Date(selectedDateTime.getTime() + 60 * 60 * 1000);
+
+        const snapshot = await getDocs(
+          query(collection(db, 'reservations'), where("date", "==", data.date))
+        );
+
+        let conflict = false;
+        snapshot.forEach(doc => {
+          const resTime = doc.data().time;
+          const existingDateTime = new Date(`${data.date}T${resTime}`);
+          if (existingDateTime >= selectedDateTime && existingDateTime < oneHourLater) {
+            conflict = true;
+          }
+        });
+
+        if (conflict) {
+          errorBox.style.display = 'block';
+          errorBox.innerText = `이미 ${data.date} ${data.time}부터 1시간 이내 예약이 존재합니다. 다른 시간을 선택해주세요.`;
+          confirmationBox.style.display = 'none';
+          return;
+        }
+
+        await addDoc(collection(db, 'reservations'), data);
+
+        // EmailJS를 통해 이메일 전송
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+          to_name: data.name,
+          to_email: data.email,
+          counseling_type: data.counselingType,
+          date: data.date,
+          time: data.time
+        })
+        .then(function(response) {
+          console.log('이메일 전송 성공!', response.status, response.text);
+        }, function(error) {
+          console.error('이메일 전송 실패...', error);
+        });
+
+        confirmationBox.style.display = 'block';
+        confirmationBox.innerText = `${data.name}님, ${data.date} ${data.time}에 ${data.counselingType}이(가) 예약되었습니다.`;
+        errorBox.style.display = 'none';
+        e.target.reset();
+      } catch (err) {
+        errorBox.style.display = 'block';
+        errorBox.innerText = '예약 저장 중 오류가 발생했습니다.';
+        confirmationBox.style.display = 'none';
+        console.error('Firebase 저장 오류:', err);
+      }
+    });
+  </script>
+</body>
+</html>
