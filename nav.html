@@ -1,0 +1,58 @@
+<style>
+  nav {
+    background-color: #283593;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+  }
+  nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  .dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #3949ab;
+    min-width: 160px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-align: left;
+    color: white;
+    text-decoration: none;
+  }
+  .dropdown-content a:hover {
+    background-color: #5c6bc0;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
+
+<nav>
+  <a href="index.html">(T)트라우마 심리상담센터</a>
+  <div class="dropdown">
+    <a href="about.html">센터소개</a>
+    <div class="dropdown-content">
+      <a href="about.html">센터소개</a>
+      <a href="director.html">대표원장 소개</a>
+      <a href="#">상담사 소개</a>
+    </div>
+  </div>
+  <a href="services.html">상담안내</a>
+  <a href="reservation.html">예약하기</a>
+  <a href="contact.html">오시는 길</a>
+</nav>

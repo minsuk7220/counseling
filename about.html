@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>센터 소개 - T트라우마 심리상담센터</title>
+  <title>센터 소개 - (T)트라우마 심리상담센터</title>
   <style>
     body {
       font-family: 'Noto Sans KR', sans-serif;
@@ -17,20 +17,6 @@
       text-align: center;
       padding: 20px;
     }
-    nav {
-      background-color: #283593;
-      text-align: center;
-      padding: 10px;
-    }
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
     section {
       max-width: 800px;
       margin: 40px auto;
@@ -38,6 +24,7 @@
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      white-space: pre-wrap;
     }
     h2 {
       color: #3f51b5;
@@ -46,35 +33,48 @@
     p {
       line-height: 1.7;
     }
+    .highlight {
+      display: block;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin: 1.2em 0 0.5em;
+      color: #2c387e;
+    }
   </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("nav.html")
+        .then(res => res.text())
+        .then(data => {
+          const header = document.querySelector("header");
+          const navContainer = document.createElement("div");
+          navContainer.innerHTML = data;
+          header.insertAdjacentElement("afterend", navContainer);
+        });
+    });
+  </script>
 </head>
 <body>
   <header>
-    <h1>센터 소개</h1>
+    <h1 class="trauma-title"><a href="index.html" style="color: white; text-decoration: none;">(T)트라우마</a></h1>
   </header>
-  <nav>
-    <a href="about.html">센터소개</a>
-    <a href="services.html">상담안내</a>
-    <a href="reservation.html">예약하기</a>
-    <a href="contact.html">오시는 길</a>
-  </nav>
   <section>
-    <h2>T트라우마 심리상담센터</h2>
     <p>
-      T트라우마 심리상담센터는 개인, 가족, 커플, 아동, 청소년, 성인 등 다양한 대상에게
-      전문적인 심리상담 서비스를 제공하고 있습니다. 내담자의 이야기에 귀 기울이고,
-      그 마음을 공감하며 함께 해결책을 찾아가는 것을 가장 중요하게 생각합니다.
-    </p>
-    <p>
-      우리 센터는 공인된 상담전문가들로 구성되어 있으며, 과학적이고 체계적인 접근을 바탕으로
-      심리적 어려움을 겪는 분들이 건강한 일상으로 돌아갈 수 있도록 돕고 있습니다.
-    </p>
-    <p>
-      안전하고 따뜻한 공간에서 편안하게 상담받을 수 있도록 항상 최선을 다하겠습니다.
-    </p>
+<span class="highlight">(T)트라우마 상담센터의 전문가</span>
+저희 상담센터는 공인 EMDR 훈련을 이수한 전문가(상담심리학과 교수)가 직접 치료를 진행하
+며, 내담자의 정서적 안전을 최우선으로 합니다. 상담 초기 면담을 통해 EMDR이 적합한 치
+료인지 평가한 후, 내담자의 속도와 준비 정도에 맞춰 치료를 시작합니다.
+
+<span class="highlight">이런 분들께 추천합니다</span>
+●반복되는 관계 갈등과 감정의 소용돌이에 지친 분
+●어린 시절의 상처가 지금까지 영향을 주고 있다고 느끼는 분
+●불안, 우울, 무기력함에서 벗어나고 싶은 분
+●자기 자신을 이해하고 싶은 분
+●삶의 전환점에서 정서적 지지가 필요한 분
+●학교 적응에 어려움이 있는 아동과 청소년</p>
   </section>
   <footer>
-    &copy; 2025 T트라우마 심리상담센터
+    &copy; 2025 (T)트라우마 심리상담센터
   </footer>
 </body>
 </html>

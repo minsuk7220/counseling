@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대표원장 소개 - (T)트라우마 심리상담센터</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+    }
+    header {
+      background-color: #3f51b5;
+      color: white;
+      padding: 40px 20px 20px;
+      text-align: center;
+    }
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 40px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 40px;
+    }
+    .profile-left {
+      flex: 0 0 250px;
+      text-align: center;
+    }
+    .profile-pic {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      object-fit: cover;
+    }
+    .profile-right {
+      flex: 1;
+    }
+    h2 {
+      color: #3f51b5;
+      margin-bottom: 15px;
+    }
+    p, li {
+      line-height: 1.7;
+      color: #333;
+      font-size: 1.05em;
+    }
+    ul {
+      margin-top: 0;
+      padding-left: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background-color: #eeeeee;
+      font-size: 0.95em;
+      color: #666;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("nav.html")
+        .then(res => res.text())
+        .then(data => {
+          const navContainer = document.createElement("div");
+          navContainer.innerHTML = data;
+          document.body.insertBefore(navContainer, document.body.firstChild);
+        });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <h1>대표원장 소개</h1>
+  </header>
+  <section>
+    <div class="profile-left">
+      <img src="director.jpg" alt="대표원장 사진" class="profile-pic">
+      <h2>김규식 박사</h2>
+    </div>
+    <div class="profile-right">
+      <p><strong>상담전문영역</strong></p>
+      <ul>
+        <li>아동, 청소년, 성인의 트라우마 상담</li>
+        <li>가족과 부부상담</li>
+        <li>트라우마와 상담분야의 교육과 자격과정 실시</li>
+      </ul>
+      <p><strong>주요 프로필</strong></p>
+      <ul>
+        <li>현재) 영남신학대학교 상담심리학과 교수/학생상담센터 소장</li>
+        <li>경북대학교 상담심리 전공 석사와 박사</li>
+        <li>캐나다 벤쿠버 Trinity Western Univ. 상담심리대학원 Post Doc.</li>
+        <li>Trinity Western Univ., Applied Counseling Program, Instructor</li>
+        <li>Langley Community Services Society, Community Counselor</li>
+        <li>Tri-City Area, SHARE, Community Counselor</li>
+        <li>Human Solutions Inc., External Associate Clinical Counselor</li>
+        <li>Dr. Kim's Counseling Clinic, Head Counselor</li>
+        <li>한국임상트라우마전문가협회 협회장</li>
+        <li>대구시교육청 학생징계조정위원장</li>
+        <li>경상남도 청소년 심리적 외상 긴급지원을 위한 자문위원</li>
+        <li>캐나다 상담 및 심리치료학회, 캐나다공인상담사(CCC, # 2146)</li>
+        <li>한국상담학회, 수련감독(# 205)</li>
+        <li>한국기독교상담학회 수련감독</li>
+        <li>한국임상트라우마전문가 자격과정 수련감독(# 01)</li>
+        <li>한국상담학회 총무이사/법인이사/감사 역임(2010-2020)</li>
+        <li>학교상담학회 트라우마/학술 위원장</li>
+        <li>대구․경북상담학회 학술위원장 및 이사</li>
+        <li>전문상담교사(임용), 청소년상담사, 전문상담사 출제위원 역임</li>
+      </ul>
+    </div>
+  </section>
+  <footer>
+    &copy; 2025 (T)트라우마 심리상담센터
+  </footer>
+</body>
+</html>

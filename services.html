@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>상담 안내 - T트라우마 심리상담센터</title>
+  <title>상담 안내 - (T)트라우마 심리상담센터</title>
   <style>
     body {
       font-family: 'Noto Sans KR', sans-serif;
@@ -17,20 +17,6 @@
       text-align: center;
       padding: 20px;
     }
-    nav {
-      background-color: #283593;
-      text-align: center;
-      padding: 10px;
-    }
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
     section {
       max-width: 800px;
       margin: 40px auto;
@@ -41,40 +27,84 @@
     }
     h2 {
       color: #3f51b5;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
-    ul {
-      padding-left: 20px;
+    .service-item {
+      margin-bottom: 30px;
+      padding: 20px;
+      border-left: 5px solid #3f51b5;
+      background-color: #f1f3fc;
+      border-radius: 8px;
     }
-    li {
-      margin-bottom: 12px;
-      line-height: 1.6;
+    .service-title {
+      font-weight: bold;
+      font-size: 1.3em;
+      color: #2c387e;
+      margin-bottom: 10px;
+    }
+    .service-desc {
+      line-height: 1.7;
+      color: #333;
     }
   </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("nav.html")
+        .then(res => res.text())
+        .then(data => {
+          const header = document.querySelector("header");
+          const navContainer = document.createElement("div");
+          navContainer.innerHTML = data;
+          header.insertAdjacentElement("afterend", navContainer);
+        });
+    });
+  </script>
 </head>
 <body>
   <header>
-    <h1>상담 안내</h1>
+    <h1 class="trauma-title"><a href="index.html" style="color: white; text-decoration: none;">(T)트라우마</a></h1>
   </header>
-  <nav>
-    <a href="about.html">센터소개</a>
-    <a href="services.html">상담안내</a>
-    <a href="reservation.html">예약하기</a>
-    <a href="contact.html">오시는 길</a>
-  </nav>
   <section>
-    <h2>제공하는 상담 서비스</h2>
-    <ul>
-      <li><strong>개인상담:</strong> 정서, 불안, 우울, 자기이해, 진로 등 개인 내면의 문제를 다룹니다.</li>
-      <li><strong>집단상담:</strong> 또래 관계, 소속감, 사회적 기술 등을 나누며 서로의 이야기에 공감하고 성장합니다.</li>
-      <li><strong>가족상담:</strong> 부모-자녀, 형제 간, 삼각관계 등 가족 내 갈등을 조율하고 건강한 소통을 돕습니다.</li>
-      <li><strong>커플상담:</strong> 연인이나 부부 간의 의사소통, 갈등해결, 신뢰 회복 등 관계의 회복을 돕습니다.</li>
-      <li><strong>위기상담:</strong> 자살충동, 트라우마, 갑작스러운 사고 등 긴급 상황에 대한 안정과 지원을 제공합니다.</li>
-      <li><strong>트라우마상담:</strong> 과거의 상처와 외상 경험을 안전하게 다루고 회복할 수 있도록 지원합니다.</li>
-    </ul>
+    <h2>상담 안내</h2>
+
+    <div class="service-item">
+      <div class="service-title">개인상담</div>
+      <div class="service-desc">
+        자신의 감정, 사고, 행동의 패턴을 탐색하고, 불안, 우울, 자존감, 스트레스, 관계의 어려움 등 개인적 고민에 대해 깊이 있게 다루는 상담입니다. 자기 이해와 정서적 회복, 삶의 방향성 회복을 돕습니다.
+      </div>
+    </div>
+
+    <div class="service-item">
+      <div class="service-title">가족상담</div>
+      <div class="service-desc">
+        부모-자녀 갈등, 부부 갈등, 세대 간 의사소통 문제 등 가족 구성원 간의 상호작용을 다루어 건강한 가족 관계 회복을 목표로 합니다.
+      </div>
+    </div>
+
+    <div class="service-item">
+      <div class="service-title">부부·커플상담</div>
+      <div class="service-desc">
+        갈등이 반복되거나 소통이 어려운 관계, 신뢰 회복이 필요한 경우, 혹은 결혼 전 미리 관계를 점검하고 싶은 커플에게 적합한 상담입니다. 서로의 감정과 기대를 안전하게 나누고, 건강한 관계로 나아가기 위한 통찰과 전략을 함께 찾아갑니다.
+      </div>
+    </div>
+
+    <div class="service-item">
+      <div class="service-title">집단상담</div>
+      <div class="service-desc">
+        비슷한 주제를 가진 사람들이 함께 모여 경험을 나누고, 상호 지지를 통해 관계 능력과 자기 이해를 높이는 상담입니다. (예: 자존감 집단, 트라우마 회복 집단 등)
+      </div>
+    </div>
+
+    <div class="service-item">
+      <div class="service-title">트라우마 상담</div>
+      <div class="service-desc">
+        <strong>트라우마 상담이란?</strong><br>
+        EMDR(안구운동 둔감화 및 재처리)의 원리를 활용하여 외상 후 스트레스(PTSD), 아동기 트라우마, 정서적 충격, 불안 및 공포 반응 등과 같은 트라우마 관련 증상에 효과적인 심리치료 기법입니다. 양쪽 눈의 교차 자극(예: 안구운동), 무릎 두드리기(촉각), 소리 들려주기(청각) 등의 자극을 통해 뇌가 자연스럽게 기억을 재처리하도록 돕는 방식으로, 고통스러운 기억이 현재의 생활에 영향을 주지 않는 방식으로 통합시켜 줍니다.
+      </div>
+    </div>
   </section>
   <footer>
-    &copy; 2025 T트라우마 심리상담센터
+    &copy; 2025 (T)트라우마 심리상담센터
   </footer>
 </body>
 </html>
